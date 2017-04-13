@@ -15,7 +15,6 @@ app.set('port', (process.env.PORT || 5000));
 app.listen(app.get('port'));
 
 app.use(xhub({ algorithm: 'sha1', secret: process.env.APP_SECRET }));
-console.log("with: " + process.env.APP_SECRET );
 app.use(bodyParser.json());
 
 app.get('/', function(req, res) {
@@ -24,7 +23,6 @@ app.get('/', function(req, res) {
 });
 
 app.get(['/facebook', '/instagram'], function(req, res) {
-  console.log("get /facebook or /instagram");
   if (
     req.param('hub.mode') == 'subscribe' &&
     req.param('hub.verify_token') == 'token'
